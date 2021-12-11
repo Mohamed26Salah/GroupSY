@@ -64,7 +64,8 @@ button:hover {
     <?php
  
    // echo $_SESSION["Type"];
-    $ID1 = $_GET["userid"];
+   // $ID1 = $_GET["userid"];
+    $ID1 = $_SESSION["userid"];
   if (isset($_POST['Ename'])) {
     $servername = "localhost";
         $username ="root";

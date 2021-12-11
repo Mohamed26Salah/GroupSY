@@ -52,7 +52,7 @@
       <!-- <form action = "upload.php" method = "post" > -->
         Select an image to upload: 
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" name="submit">
+        <!-- <input type="submit" value="Upload Image" name="submit"> -->
     
     </div>   
       <button class="submit-btn" type="submit">Register</button>
@@ -117,7 +117,7 @@
             $_SESSION["image"]=$row[6];
               ?>
 
-            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
+            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php");</script>
              <?php
              //remeber to tsheel id mn elink 3lsah nelzft speeddddd
 
