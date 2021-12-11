@@ -102,7 +102,7 @@ button:hover {
        
      }
      else{
-       $GLOBALS['src'] ="uploads/".$_SESSION["image"];
+       $GLOBALS['src'] =$_SESSION["image"];
      }
      //echo"$src";
   ?>
