@@ -117,7 +117,7 @@
             $_SESSION["image"]=$row[6];
               ?>
 
-            <script>window.location.replace("http://localhost/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
+            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
              <?php
              //remeber to tsheel id mn elink 3lsah nelzft speeddddd
 
@@ -196,7 +196,7 @@
             $_SESSION["image"]=$row[6];
 
               ?>
-            <script>window.location.replace("http://localhost/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
+            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
              <?php
             exit();
             }
