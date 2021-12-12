@@ -4,18 +4,16 @@
 	<meta charset="utf-8">
 	<title>courses</title>
 	<link rel="stylesheet" href="courseStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<table border=1>
-<tr>
-  <th> courseId </th>
-  <th> courseName </th>
-  <th> coursePrice </th>
-  <th> enrolledSid </th>
-  <th> description </th>
-  <th> instructorName </th>
-  <th> image </th>
-</tr>
+   
+<section class="course">
+
+    <div class="row">
        <?php
         $servername = "localhost";
         $username ="root";
@@ -27,21 +25,38 @@
            
             $sql= "SELECT * FROM course";
             $result=mysqli_query($conn,$sql);
+    
+        
             while($row=mysqli_fetch_array($result)){
             	?>
-            	<tr>
-            	 <td> <?php echo $row['courseId'] ?></td>
-                 <td> <?php echo $row['courseName'] ?></td>
-                 <td> <?php echo $row['coursePrice'] ?></td>
-                 <td> <?php echo $row['enrolledSid'] ?></td>
-                 <td> <?php echo $row['description'] ?></td>
-                 <td> <?php echo $row['instructorName'] ?></td>
-                 <td> <?php echo $row['image'] ?></td><br>
-                </tr>
+<a href="">
+                <div class="Course-col">
+                  <img src="<?php echo $row['image']; ?>"></a>
+            	  <?php //echo $row['courseId'] ?>
+                  <span class="coursename"><?php echo $row['courseName']; ?></span><br>
+                  <span class="coursename2"> <?php echo $row['instructorName']; ?></span><br>
+                  
+
+                  <?php echo "(".$row['enrolledSid'].")"; ?><br>
+
+                  <!-- <?php echo $row['description'];?><br> -->
+
+                 <span class="coursename3"><?php echo $row['coursePrice']; ?></span><br>
+
+                  <br>
+
+
+                 </div>
+                 </a>
+
                  <?php
             }
+            ?>
+            </div>
+       
+  
+</div>
+</section>
 
-       ?>
-   </table>
 </body>
 </html>
