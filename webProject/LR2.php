@@ -117,7 +117,7 @@
             $_SESSION["image"]=$row[6];
               ?>
 
-            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php");</script>
+            <script>window.location.replace("http://localhost/GroupSY/webProject/index.php");</script>
              <?php
              //remeber to tsheel id mn elink 3lsah nelzft speeddddd
 

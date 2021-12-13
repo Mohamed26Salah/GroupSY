@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<?php session_start();?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Universtiy Website</title>
 	<link rel="stylesheet" href="style.css">
@@ -13,8 +14,11 @@
 </head>
 <body>
   <section class="header">
+  	<?php
+if (empty($_SESSION['username'])) {
+    ?>
   	<nav>
-  		<a href="index.html"><img src="images2/logo.png"></a>
+  		<a href="index.php"><img src="images2/logo.png"></a>
   		
         <div class="nav-links">
 
@@ -28,11 +32,31 @@
         	</ul>
         	
         </div>
-
-
-
-
   	</nav>
+<?php
+}
+else{
+    ?>
+    <nav>
+  		<a href="index.php"><img src="images2/logo.png"></a>
+  		
+        <div class="nav-links">
+
+        	<ul>
+        		<li><a href="">Home</a></li>
+        		<li><a href="">About</a></li>
+        		<li><a href="courses.php">COURSES</a></li>
+        		<li><a href="">BLOG</a></li>
+        		<li><a href="">CONTACT</a></li>
+        		<li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
+        		<li><a href="signOut.php">signOut</a></li>
+        	</ul>
+        	
+        </div>
+  	</nav>
+<?php
+}
+     ?>
 
     <div class="text-box">
     	<h1>Best course website in the world</h1>
