@@ -62,11 +62,12 @@ button:hover {
     </style>
 
     <?php
+  
  
    // echo $_SESSION["Type"];
    // $ID1 = $_GET["userid"];
     $ID1 = $_SESSION["userid"];
-  if (isset($_POST['Ename'])) {
+  if (isset($_POST['submit'])) {
     $servername = "localhost";
         $username ="root";
         $password = "";
@@ -78,17 +79,18 @@ button:hover {
             $name=$_POST['Ename'];
             $password=$_POST['Epassword'];
             $email=$_POST['Eemail'];
+            $image=$_SESSION['image'];
            // $gender=$_POST['gender'];
 
+            $sql= "UPDATE users SET email='$email',password='$password',username='$name',image='$image' WHERE userid =".$ID1;
             
-            $sql= "UPDATE users SET email='$email',password='$password',username='$name' WHERE userid =".$ID1;
             $result=mysqli_query($conn,$sql);
            
             
             $_SESSION["email"]=$_POST['Eemail'];
             $_SESSION["Password"]=$_POST['Epassword'];
             $_SESSION["username"]=$_POST['Ename'];
-           
+            
             
 
 
@@ -119,13 +121,14 @@ button:hover {
 </head>
 <body background="background1.jpg">
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <div class="container rounded bg-white mt-5 mb-5">
  <!-- dont take a copy from the img name -->
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $src?>"><span class="font-weight-bold"><?php echo  $_SESSION["username"] ?></span><span class="text-black-50"><?php echo $_SESSION["email"] ?></span><span> </span>
-
+            Select an image to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
 
             </div>
         </div>
@@ -144,7 +147,7 @@ button:hover {
                     <br><?php echo $_SESSION["gender"] ?></div>
 
                 </div>
-                <div class="mt-5 text-center"><button style="background-color: purple ;" class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                <div class="mt-5 text-center"><button style="background-color: purple ;" class="btn btn-primary profile-button" type="submit" name='submit'>Save Profile</button></div>
             </div>
             <!-- background="background.jpg" -->
         </div>
@@ -164,6 +167,28 @@ button:hover {
 
 
 
+<?php
+if (isset($_FILES['fileToUpload']['name'])) {
+    $target_dir = "uploads/";
+    $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
+    $_SESSION['image']=$target_file;
+    echo $target_dir;
+        if($_FILES['fileToUpload']['size']>1000000)
+            echo "the file is too large";
 
+    echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
+
+    if($_FILES['fileToUpload']['type']== "image/jpeg")
+        echo "the file is accepted";
+    else
+        echo "File has to be a jpeg image";
+
+
+    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
+    $name = basename($_FILES['fileToUpload']['name']);
+    move_uploaded_file($tmp_name, "$target_dir/$name"); 
+}
+
+?>
 </body>
 </html>
