@@ -71,7 +71,7 @@ body {
  .topnav{
     flex: 1;
     text-align: right;
-
+margin-top: 1%;
 border-radius: 15px 50px 30px;
     background-color:#6A5EFC ;
  }
