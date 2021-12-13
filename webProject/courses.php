@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start();?>
 	<meta charset="utf-8">
 	<title>courses</title>
 	<link rel="stylesheet" href="courseStyle.css">
@@ -13,13 +12,10 @@
 
 </head>
 <body>
-    <?php
-if (empty($_SESSION['username'])) {
-    ?>
    <nav>
     <div class="topnav">
  <ul>
-                <li><a href="index.php">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
                 <li><a href="">BLOG</a></li>
@@ -43,42 +39,6 @@ if (empty($_SESSION['username'])) {
  -->
   </form>
 </nav>
-<?php
-}
-else{
-    ?>
-<nav>
-    <div class="topnav">
- <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="courses.php">COURSES</a></li>
-                <li><a href="">BLOG</a></li>
-                <li><a href="">CONTACT</a></li>
-                <li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
-                <li><a href="signOut.php">signOut</a></li>
-            </ul>
-</div>
-
-
-<form method="post">
-<div class="searchBox">
-            <input class="searchInput"type="text" name="search" placeholder="enter course name....">
-            <button class="searchButton" href="#"type="submit" name="submit" value = "Search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-
-    <!-- <input type="text" name="search" placeholder="enter course name....">
-
-    <input type="submit" name="submit" value = "Search">
- -->
-  </form>
-</nav>
-<?php
-}
-     ?>
-   
 
 
 <section class="course">
