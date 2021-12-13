@@ -79,15 +79,15 @@
    font-size:1.5em;
 
  }
- .coursename2{
+ .instName{
   margin-left:7px;
   /*font-weight: bold;*/
    color: gray;
    font-size:1.3em;
    line-height: 0.5px;
  }
- .coursename3{
-   margin-left:290px;
+ .price{
+   margin-left:275px;
    font-weight: 600;
    color: black;
    font-size:1.3em;

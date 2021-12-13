@@ -34,14 +34,14 @@
                   <img src="<?php echo $row['image']; ?>"></a>
             	  <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
-                  <span class="coursename2"> <?php echo $row['instructorName']; ?></span><br>
+                  <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
                   
 
                   <?php echo "(".$row['enrolledSid'].")"; ?><br>
 
                   <!-- <?php echo $row['description'];?><br> -->
 
-                 <span class="coursename3"><?php echo $row['coursePrice']; ?></span><br>
+                 <span class="price"><?php echo "$".$row['coursePrice']; ?></span><br>
 
                   <br>
 
