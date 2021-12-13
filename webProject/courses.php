@@ -15,7 +15,7 @@
    <nav>
     <div class="topnav">
  <ul>
-                <li><a href="">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
                 <li><a href="">BLOG</a></li>

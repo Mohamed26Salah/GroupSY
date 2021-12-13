@@ -8,7 +8,7 @@ body {
     top: 2.5%;
     left: 50%;
     transform:  translate(-100%,0%);
-    background: #8980F5;
+    background: #7AD3DC;
     height: 40px;
     border-radius: 40px;
     
@@ -37,7 +37,7 @@ body {
     transition: 0.4s;
 }
 .searchInput::placeholder {
-  color: white;
+  color: black;
 
 }
 .searchInput {
@@ -73,7 +73,16 @@ body {
     text-align: right;
 margin-top: 1%;
 border-radius: 15px 50px 30px;
-    background-color:#6A5EFC ;
+   
+
+ 
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);  
+     background-size: 400% 400%;  
+        animation: gradient 13s ease infinite;     height: 8vh; } 
+         @keyframes gradient { 
+          0% {         background-position: 0% 50%;     }    
+          50% {         background-position: 100% 50%;     }    
+          100% {       background-position: 0% 50%;     } 
  }
  .topnav ul li{
     list-style: none;
@@ -82,7 +91,7 @@ border-radius: 15px 50px 30px;
     position: relative;
  }
  .topnav ul li a{
-    color: black;
+    color: white;
     text-decoration: none;
     font-size: 20px;
  }
@@ -100,5 +109,5 @@ border-radius: 15px 50px 30px;
 
  }
  .fa-user-circle{
-color:#FF3E00;
+color:black;
 }
