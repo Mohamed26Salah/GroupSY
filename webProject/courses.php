@@ -31,7 +31,7 @@
             	?>
 <a href="">
                 <div class="Course-col">
-                  <img src="<?php echo $row['image']; ?>"></a>
+                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"></a>
             	  <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
