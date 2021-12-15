@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
     <?php session_start();?>
+    
     <meta charset="utf-8">
     <title>courses</title>
     <link rel="stylesheet" href="courseStyle.css">
     <link rel="stylesheet" href="search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+   
 </head>
 <body>
+
     <?php
 if (empty($_SESSION['username'])) {
     ?>
@@ -83,120 +83,58 @@ else{
      ?>
    
 
-
-
-
-
-
-
-<?php 
-
-//index.php
-
-$connect = new PDO("mysql:host=localhost;dbname=webdatabase", "root", "");
-
-$message = '';
-
-if(isset($_POST["add_to_cart"]))
-{
-   
-    if(isset($_COOKIE["shopping_cart"]))
-    {
-        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-
-        $cart_data = json_decode($cookie_data, true);
-    }
-    else
-    {
-        $cart_data = array();
-    }
-
-    $item_id_list = array_column($cart_data, 'item_id');
-
-    if(in_array($_POST["hidden_id"], $item_id_list))
-    {
-        foreach($cart_data as $keys => $values)
-        {
-            if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
-            {
-                $cart_data[$keys]["item_quantity"] = $cart_data[$keys]["item_quantity"] + $_POST["quantity"];
-            }
-        }
-    }
-    else
-    {
-        $item_array = array(
-            'item_id'           =>  $_POST["hidden_id"],
-            'item_name'         =>  $_POST["hidden_name"],
-            'item_price'        =>  $_POST["hidden_price"],
-            'item_quantity'     =>  $_POST["quantity"]
-        );
-        $cart_data[] = $item_array;
-    }
-
-    
-    $item_data = json_encode($cart_data);
-    setcookie('shopping_cart', $item_data, time() + (86400 * 30));
-    header("location:/GroupSY/webProject/courses.php?success=1");
+   <?php
+   $courseName=0;
+   $price1=0;
+   $image1=0;
+   $courseId=0;
+$conn = mysqli_connect("localhost","root","","webdatabase");
+$status="";
+if (isset($_POST['code']) && $_POST['code']!=""){
+$code = $_POST['code'];
+$sql="SELECT * FROM course WHERE courseId ='$code'";
+// $result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn, $sql) or die( mysqli_error($conn));
+while($row = mysqli_fetch_assoc($result)){
+    $GLOBALS['courseName'] = $row['courseName'];
+    $GLOBALS['price1'] = $row['coursePrice'];
+    $GLOBALS['image1'] = $row['image'];
+    $GLOBALS['courseId'] = $row['courseId'];
 }
+$cartArray = array(
+    $code=>array(
+    // 'name'=>$name,
+    'courseName'=>$GLOBALS['courseName'],
+    'coursePrice'=>$GLOBALS['price1'],
+    'image'=>$GLOBALS['image1'],
+    'courseId'=>$GLOBALS['courseId'])
+     );
 
-if(isset($_GET["action"]))
-{
-    if($_GET["action"] == "delete")
-    {
-        
-        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-        $cart_data = json_decode($cookie_data, true);
-        foreach($cart_data as $keys => $values)
-        {
-            if($cart_data[$keys]['item_id'] == $_GET["id"])
-            {
-                unset($cart_data[$keys]);
-                $item_data = json_encode($cart_data);
-                setcookie("shopping_cart", $item_data, time() + (86400 * 30));
-                header("location:/GroupSY/webProject/courses.php?remove=1");
-            }
-        }
+if(empty($_SESSION["shopping_cart"])) {
+    $_SESSION["shopping_cart"] = $cartArray;
+    $status = "<div class='box'>Product is added to your cart!</div>";
+}else{
+    $array_keys = array_keys($_SESSION["shopping_cart"]);
+    if(in_array($code,$array_keys)) {
+        $status = "<div class='box' style='color:red;'>
+        Product is already added to your cart!</div>";  
+    } else {
+    $_SESSION["shopping_cart"] = array_merge($_SESSION["shopping_cart"],$cartArray);
+    $status = "<div class='box'>Product is added to your cart!</div>";
     }
-    if($_GET["action"] == "clear")
-    {
-        setcookie("shopping_cart", "", time() - 3600);
-        header("location:/GroupSY/webProject/courses.php?clearall=1");
+
     }
 }
 
-if(isset($_GET["success"]))
-{
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Item Added into Cart
-    </div>
-    ';
-}
-
-if(isset($_GET["remove"]))
-{
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Item removed from Cart
-    </div>
-    ';
-}
-if(isset($_GET["clearall"]))
-{
-    $message = '
-    <div class="alert alert-success alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Your Shopping Cart has been clear...
-    </div>
-    ';
-}
-
-
+if(!empty($_SESSION["shopping_cart"])) {
+$cart_count = count(array_keys($_SESSION["shopping_cart"]));
 ?>
-
+<div class="cart_div">
+<a href="cart.php"><img src="cart-icon.png" /> Cart<span><?php echo $cart_count; ?></span></a>
+</div>
+<?php
+}
+?>
 
 <section class="course">
 
@@ -204,17 +142,15 @@ if(isset($_GET["clearall"]))
        <?php
        if (empty($_POST['search'])) {
           $servername = "localhost";
-        $username ="root";
-        $password = "";
-        $DB = "webdatabase";
-        $conn = mysqli_connect($servername,$username,$password,$DB);
+          $username ="root";
+          $password = "";
+          $DB = "webdatabase";
+          $conn = mysqli_connect($servername,$username,$password,$DB);
 
         
            
             $sql= "SELECT * FROM course";
             $result=mysqli_query($conn,$sql);
-    
-        
             while($row=mysqli_fetch_array($result)){
                 ?>
 <a href="">
@@ -223,8 +159,13 @@ if(isset($_GET["clearall"]))
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
-                  
-
+                <?php 
+                 echo"
+                <form method='post' action=''>
+                   <input type='hidden' name='code' value=".$row['courseId'].">
+                   <button type='submit' class='buy'>Buy Now</button>
+               </form>
+               ";?>
                   <?php echo "(".$row['enrolledSid'].")"; ?><br>
 
                   <!-- <?php echo $row['description'];?><br> -->
@@ -232,19 +173,14 @@ if(isset($_GET["clearall"]))
                  <span class="price"><?php echo "$".$row['coursePrice']; ?></span><br>
 
                   <br>
-                  <form method="post">
-                  <!-- <input type="text" name="quantity" value="1" class="form-control" /> -->
-                  <input type="hidden" name="hidden_name" value="<?php echo $row["courseName"]; ?>" />
-                  <input type="hidden" name="hidden_price" value="<?php echo $row["coursePrice"]; ?>" />
-                  <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
-                  <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
-                  </form>
+
 
                  </div>
                  </a>
 
                  <?php
             }
+            mysqli_close($conn);
            
        }
        else{
@@ -253,8 +189,6 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
 
     if($conn-> connect_error)
       die("fatal error - cannot connect to the DB");
-
-
 
     if(isset($_POST['submit'])) {
 
@@ -302,11 +236,10 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
   
 </div>
 </section>
+<div style="clear:both;"></div>
 
-<div class="cart_Icon">
-<a href="speedCart.php"><img src="cart-icon.png" /> Cart</a>
-<?php echo $message; ?>
-</div>    
- 
+<div class="message_box" style="margin:10px 0px;">
+<?php echo $status; ?>
+</div>
 </body>
 </html>

@@ -14,10 +14,9 @@
  
  .course{
    width: 90%;
-
    margin: auto;
    /*text-align: center;*/
-   padding-top: 70px;
+   padding-top: 90px;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -94,3 +93,30 @@
    font-size:1.3em;
    line-height: 0.5px;
  }
+
+ .cart{
+ /* margin-left: 5px;
+   margin-right: 5px;*/
+   /*margin-top: 1300px;*/
+   /*flex-basis: 21%;*/
+   background: #F1F1F1;
+   border-radius: 10px;
+   /*margin-bottom: 5%;*/
+   box-sizing: border-box;
+   /*height: auto;
+   width: auto;*/
+   transition: 0.5s;
+   margin: auto;
+  /* margin-bottom: 10%;*/
+ }
+ .cart:hover{
+   box-shadow: 0 0 20px 0px rgba(0, 0, 0,0.8);
+
+}
+.cart_Icon{
+   margin: -193px 0px auto 10px;
+   box-sizing: border-box;
+   border-radius: 10px;
+   width:auto;
+
+}

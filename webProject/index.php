@@ -15,6 +15,7 @@
 <body>
   <section class="header">
   	<?php
+  	setcookie('counter', 0, time() + (86400 * 30));
 if (empty($_SESSION['username'])) {
     ?>
   	<nav>
