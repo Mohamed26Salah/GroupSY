@@ -83,12 +83,6 @@ else{
      ?>
    
 
-
-
-
-
-
-
 <?php 
 
 //index.php
@@ -103,7 +97,6 @@ if(isset($_POST["add_to_cart"]))
     if(isset($_COOKIE["shopping_cart"]))
     {
         $cookie_data = stripslashes($_COOKIE['shopping_cart']);
-
         $cart_data = json_decode($cookie_data, true);
     }
     else
@@ -119,7 +112,8 @@ if(isset($_POST["add_to_cart"]))
         {
             if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
             {
-                $cart_data[$keys]["item_quantity"] = $cart_data[$keys]["item_quantity"] + $_POST["quantity"];
+                header("location:/GroupSY/webProject/courses.php?failed=1");
+                //fe moshkela hna 
             }
         }
     }
@@ -190,6 +184,15 @@ if(isset($_GET["clearall"]))
     <div class="alert alert-success alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
         Your Shopping Cart has been clear...
+    </div>
+    ';
+}
+if(isset($_GET["failed"]))
+{
+    $message = '
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Item is Already Added into Cart
     </div>
     ';
 }
@@ -281,6 +284,13 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                  <span class="price"><?php echo "$".$row['coursePrice']; ?></span><br>
 
                   <br>
+                  <form method="post">
+                   <!-- <input type="text" name="quantity" value="1" class="form-control" /> -->
+                  <input type="hidden" name="hidden_name" value="<?php echo $row["courseName"]; ?>" />
+                  <input type="hidden" name="hidden_price" value="<?php echo $row["coursePrice"]; ?>" />
+                  <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
+                  <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
+                  </form>
 
 
                  </div>
@@ -302,11 +312,67 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
   
 </div>
 </section>
+  
+ <div class="cart">
+    <?php echo $message; ?>
+            <div style="clear:both"></div>
+            <br />
+            <h3>Order Details</h3>
+            
+           
+            <table class="table table-bordered">
+                <tr>
+                    <th width="40%">Item Name</th>
+                    
+                    <th width="20%">Price</th>
+                   <!--  <th width="15%">Total</th> -->
+                    <th width="5%">Action</th>
+                </tr>
+            <?php
+            if(isset($_COOKIE["shopping_cart"]))
+            {
+                $total = 0;
+                $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+                $cart_data = json_decode($cookie_data, true);
+                foreach($cart_data as $keys => $values)
+                {
+            ?>
+                <tr>
+                    <td><?php echo $values["item_name"]; ?></td>
+                    <td><?php echo $values["item_quantity"]; ?></td>
+                    <td>$ <?php echo $values["item_price"]; ?></td>
+                    <td><a href="/GroupSY/webProject/courses.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                </tr>
+            <?php   
+                    $total = $total + $values["item_price"];
+                }
+            ?>
+                <tr>
+                    <td colspan="3" align="right">Total</td>
+                    <td align="right">$ <?php echo number_format($total, 2); ?></td>
+                    <td></td>
+                </tr>
+            <?php
+            }
+            else
+            {
+                echo '
+                <tr>
+                    <td colspan="5" align="center">No Item in Cart</td>
+                </tr>
+                ';
+                echo $_COOKIE["shopping_cart"];
+            }
+            ?>
+            </table>
+           <div align="right">
+  <a href="/GroupSY/webProject/courses.php?action=clear"><b>Clear Cart</b></a>
+</div>
+     </div>
+     
 
-<div class="cart_Icon">
-<a href="speedCart.php"><img src="cart-icon.png" /> Cart</a>
-<?php echo $message; ?>
-</div>    
  
+
+
 </body>
 </html>

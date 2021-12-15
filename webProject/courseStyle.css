@@ -106,17 +106,14 @@
    /*height: auto;
    width: auto;*/
    transition: 0.5s;
-   margin: auto;
+  /* margin: auto;*/
   /* margin-bottom: 10%;*/
+  justify-content: center;
+  margin-top: 1300px;
+  margin-left: 430px;
+  width: 60%;
  }
  .cart:hover{
    box-shadow: 0 0 20px 0px rgba(0, 0, 0,0.8);
-
 }
-.cart_Icon{
-   margin: -193px 0px auto 10px;
-   box-sizing: border-box;
-   border-radius: 10px;
-   width:auto;
 
-}
