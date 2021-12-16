@@ -65,7 +65,7 @@
  </div>
   <?php
 ///////////////////////////////////////////////////////////////////////
-
+ if(!empty($_FILES['fileToUpload']['name'])){
     $target_dir = "uploads/";
     $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
 
@@ -88,7 +88,7 @@
     move_uploaded_file($tmp_name, "$target_dir/$name");
 
 
-
+}
 
 
   /////////////////////////////////////////////////////////////////////////
@@ -196,7 +196,7 @@
             $_SESSION["image"]=$row[6];
 
               ?>
-            <script>window.location.replace("http://localhost/GroupSY/webProject/Profile.php?userid=<?php echo $row['userid'] ?>");</script>
+            <script>window.location.replace("http://localhost/GroupSY/webProject/index.php");</script>
              <?php
             exit();
             }

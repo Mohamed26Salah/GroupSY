@@ -11,7 +11,23 @@
  	background-size: cover;
  	position: relative;
  }
- 
+ .fasl{
+  margin-left: 5px;
+   margin-right: 5px;
+   margin-top: 50px;
+  /* flex-basis: 21%;*/
+   /*background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(texture/jpg);*/
+   border-radius: 10px;
+   /*margin-bottom: 5%;*/
+  /* padding: 20px 10px;*/
+   box-sizing: border-box;
+   height: 50px;
+   width: auto;
+   text-align: center;
+   color: white;
+   font-size:2.5em;
+   /*background-size: 150% 0%;*/
+ }
  .course{
    width: 90%;
    margin: auto;

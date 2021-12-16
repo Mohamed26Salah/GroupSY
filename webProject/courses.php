@@ -78,11 +78,57 @@ else{
  -->
   </form>
 </nav>
-<?php
+
+<section class="course">
+
+    <div class="row">
+    <?php
+     $servername = "localhost";
+        $username ="root";
+        $password = "";
+        $DB = "webdatabase";
+        $conn = mysqli_connect($servername,$username,$password,$DB);
+            $sql= "SELECT courseId FROM userCourse WHERE userid = '".$_SESSION['userid'].
+            "'";
+            $result=mysqli_query($conn,$sql);
+            while($row=mysqli_fetch_array($result)){
+            $sql2= "SELECT * FROM course Where courseId = '".$row['courseId']."'";
+            $result2=mysqli_query($conn,$sql2);
+    
+        
+            if($row2=mysqli_fetch_array($result2)){
+                ?>
+                
+                 <div class="Course-col">
+                  <img src="<?php echo $row2['image']; ?>" height="250px" width="400px"></a>
+                  <?php //echo $row['courseId'] ?>
+                  <span class="coursename"><?php echo $row2['courseName']; ?></span><br>
+                  <span class="instName"> <?php echo $row2['instructorName']; ?></span><br>
+                  
+
+                  <?php echo "(".$row2['enrolledSid'].")"; ?><br>
+
+                  <!-- <?php echo $row['description'];?><br> -->
+
+                 <span class="price"><?php echo "$".$row2['coursePrice']; ?></span><br>
+
+                  <br>
+              </div>
+
+              <?php
+
+               
+               
+            }
+        }
+        
+    
 }
      ?>
+ </div>
+</section>
    
-
+<div class="fasl" style="background-image: url('texture.jpg');">Discover New Courses</div>
 <?php 
 
 //index.php
@@ -400,6 +446,6 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
 
  
 
-
+</div>
 </body>
 </html>
