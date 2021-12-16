@@ -113,7 +113,7 @@ if(isset($_POST["add_to_cart"]))
             if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
             {
                 header("location:/GroupSY/webProject/courses.php?failed=1");
-                //fe moshkela hna 
+                //fe moshkela hna //ask samira
             }
         }
     }
@@ -122,8 +122,8 @@ if(isset($_POST["add_to_cart"]))
         $item_array = array(
             'item_id'           =>  $_POST["hidden_id"],
             'item_name'         =>  $_POST["hidden_name"],
-            'item_price'        =>  $_POST["hidden_price"],
-            'item_quantity'     =>  $_POST["quantity"]
+            'item_price'        =>  $_POST["hidden_price"]
+            
         );
         $cart_data[] = $item_array;
     }
@@ -206,7 +206,7 @@ if(isset($_GET["failed"]))
     <div class="row">
        <?php
        if (empty($_POST['search'])) {
-          $servername = "localhost";
+        $servername = "localhost";
         $username ="root";
         $password = "";
         $DB = "webdatabase";
@@ -222,7 +222,7 @@ if(isset($_GET["failed"]))
                 ?>
 <a href="">
                 <div class="Course-col">
-                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"></a>
+                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"><!-- </a> -->
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
@@ -339,8 +339,7 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
             ?>
                 <tr>
                     <td><?php echo $values["item_name"]; ?></td>
-                    <td><?php echo $values["item_quantity"]; ?></td>
-                    <td>$ <?php echo $values["item_price"]; ?></td>
+                    <td colspan="1">$ <?php echo $values["item_price"]; ?></td>
                     <td><a href="/GroupSY/webProject/courses.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
                 </tr>
             <?php   
@@ -349,8 +348,8 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
             ?>
                 <tr>
                     <td colspan="3" align="right">Total</td>
-                    <td align="right">$ <?php echo number_format($total, 2); ?></td>
-                    <td></td>
+                    <td>$ <?php echo number_format($total, 2); ?></td>
+                    <td> <form method="post"><input type="submit" name="BuyNow" style="margin-top:5px;" class="btn btn-success" value="Buy Now" /></form> </td>
                 </tr>
             <?php
             }
@@ -361,15 +360,41 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                     <td colspan="5" align="center">No Item in Cart</td>
                 </tr>
                 ';
-                echo $_COOKIE["shopping_cart"];
+                
             }
             ?>
             </table>
-           <div align="right">
+           <div align="left">
   <a href="/GroupSY/webProject/courses.php?action=clear"><b>Clear Cart</b></a>
 </div>
      </div>
-     
+   <?php
+   if(isset($_POST['BuyNow'])){
+    if(empty($_SESSION['username'])){
+         ?>
+            <script>window.location.replace("LR2.php");</script>
+             <?php 
+    }
+    else{
+        // connecting dp by speed
+        $servername = "localhost";
+        $username ="root";
+        $password = "";
+        $DB = "webdatabase";
+        $conn = mysqli_connect($servername,$username,$password,$DB);
+        $cookie_data = stripslashes($_COOKIE['shopping_cart']);
+        $cart_data = json_decode($cookie_data, true);
+        foreach($cart_data as $keys => $values)
+                {
+                    $sql= "INSERT INTO `usercourse`(`userid`, `username`, `courseName`, `courseId`) VALUES ('".$_SESSION['userid']."','".$_SESSION['username']."','".$values["item_name"]."','".$values["item_id"]."')";
+                     $result=mysqli_query($conn,$sql);
+                }
+
+           $message1 = "Thank you for your purchase.\\nTry again.";
+              echo "<script type='text/javascript'>alert('$message1');</script>";
+    }
+   }
+   ?>  
 
  
 
