@@ -11,10 +11,16 @@
  	background-size: cover;
  	position: relative;
  }
+ .All{
+  display: wrap;
+  column-gap: 20px;
+  justify-content: space-between;
+
+ }
  .fasl{
   margin-left: 5px;
    margin-right: 5px;
-   margin-top: 50px;
+   margin-top: 300px;
   /* flex-basis: 21%;*/
    /*background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(texture/jpg);*/
    border-radius: 10px;
@@ -33,6 +39,16 @@
    margin: auto;
    /*text-align: center;*/
    padding-top: 90px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   
+}
+.course2{
+   width: 90%;
+   margin: auto;
+   /*text-align: center;*/
+   padding-top: 10px;
    display: flex;
    justify-content: center;
    align-items: center;
