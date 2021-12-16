@@ -112,6 +112,7 @@ if(isset($_POST["add_to_cart"]))
         {
             if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
             {
+                echo "it is already in the cart";
                 header("location:/GroupSY/webProject/courses.php?failed=1");
                 //fe moshkela hna //ask samira
             }
@@ -222,7 +223,7 @@ if(isset($_GET["failed"]))
                 ?>
 <a href="">
                 <div class="Course-col">
-                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"><!-- </a> -->
+                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"></a>
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
@@ -244,7 +245,7 @@ if(isset($_GET["failed"]))
                   </form>
 
                  </div>
-                 </a>
+                 
 
                  <?php
             }
@@ -389,9 +390,10 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                     $sql= "INSERT INTO `usercourse`(`userid`, `username`, `courseName`, `courseId`) VALUES ('".$_SESSION['userid']."','".$_SESSION['username']."','".$values["item_name"]."','".$values["item_id"]."')";
                      $result=mysqli_query($conn,$sql);
                 }
+              //moshkela hna  
+           $message1 = "Thank you for your purchase.";
+           echo "<script type='text/javascript'>alert('$message1');</script>";
 
-           $message1 = "Thank you for your purchase.\\nTry again.";
-              echo "<script type='text/javascript'>alert('$message1');</script>";
     }
    }
    ?>  
