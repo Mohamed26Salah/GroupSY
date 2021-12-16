@@ -148,4 +148,8 @@
  .cart:hover{
    box-shadow: 0 0 20px 0px rgba(0, 0, 0,0.8);
 }
+.star{
+  margin-left: 1%;
+  margin-bottom: 20%;
+}
 

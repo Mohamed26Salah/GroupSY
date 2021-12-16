@@ -244,9 +244,88 @@ if(isset($_GET["failed"]))
                   <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
                   <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                   </form>
-                
-                 </div>
+                  <div class="star">
+                  <?php 
+                  $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
+                  $result3=mysqli_query($conn,$sql3);
+                   if($row3=mysqli_fetch_array($result3)){
+                    if($row3['Total']<=1){
+                        ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                     else if($row3['Total']>1&&$row3['Total']<=1.5){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>1.5&&$row3['Total']<=2){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>2&&$row3['Total']<=2.5){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>2.5&&$row3['Total']<=3){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                     else if($row3['Total']>3.5&&$row3['Total']<=4){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>4&&$row3['Total']<=4.5){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>4.5&&$row3['Total']<=5){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <?php
+                    }
+                   }
+                  ?>
                  
+                 </div>
+                </div>
 
                  <?php
             }
@@ -293,7 +372,92 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                   <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
                   <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                   </form>
+                  <?php 
+                  $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
+                  $result3=mysqli_query($conn,$sql3);
+                   if($row3=mysqli_fetch_array($result3)){
+                    if($row3['Total']<=1){
+                        ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                     else if($row3['Total']>1&&$row3['Total']<=1.5){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>1.5&&$row3['Total']<=2){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>2&&$row3['Total']<=2.5){
+                         ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>2.5&&$row3['Total']<=3){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                     else if($row3['Total']>3.5&&$row3['Total']<=4){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>4&&$row3['Total']<=4.5){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <?php
+                    }
+                    else if($row3['Total']>4.5&&$row3['Total']<=5){
+                       ?>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <?php
+                    }
+                   }
+                  ?>
+                 
+                 </div>
+                 
 
+                 
+            }
+           
+       }
 
                  </div>
                  </a>
