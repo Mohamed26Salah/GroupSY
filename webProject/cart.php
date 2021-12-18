@@ -226,21 +226,12 @@ if(isset($_GET["failed"]))
                 {
                     $sql= "INSERT INTO `usercourse`(`userid`, `username`, `courseName`, `courseId`) VALUES ('".$_SESSION['userid']."','".$_SESSION['username']."','".$values["item_name"]."','".$values["item_id"]."')";
                      $result=mysqli_query($conn,$sql);
+                      $sql2 = "UPDATE course set enrolledSid=enrolledSid+1 WHERE courseid ='".$values["item_id"]."'";
+                      $result2=mysqli_query($conn,$sql2);
                 }
               //moshkela hna  
            $message1 = "Thank you for your purchase.";
            echo "<script type='text/javascript'>alert('$message1');</script>";
-
-
-
-         
-
-
-
-
-
-
-
     }
    }
    ?>  
