@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+
 </head>
 <body>
     <?php
+    $counter=0;
 if (empty($_SESSION['username'])) {
     ?>
    <nav>
@@ -25,7 +27,7 @@ if (empty($_SESSION['username'])) {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
-                <li><a href="">BLOG</a></li>
+                <li><a href="myCourses.php">My Courses</a></li>
                 <li><a href="">CONTACT</a></li>
                 <li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
             </ul>
@@ -56,7 +58,7 @@ else{
                 <li><a href="index.php">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
-                <li><a href="">BLOG</a></li>
+                <li><a href="myCourses.php">My Courses</a></li>
                 <li><a href="">CONTACT</a></li>
                 <li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
                 <li><a href="signOut.php">signOut</a></li>
@@ -128,12 +130,22 @@ if(isset($_POST["add_to_cart"]))
             
         );
         $cart_data[] = $item_array;
+        
     }
+
 
     
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 30));
     header("location:/GroupSY/webProject/courses.php?success=1");
+}
+if(!empty($_COOKIE["shopping_cart"])) {
+// $cart_count = count(array($_COOKIE["shopping_cart"]));
+?>
+<div class="cart_div">
+<a href="cart.php"><img src="cart-icon.png" /> Cart<span><!-- <?php echo $cart_count; ?> --></span></a>
+</div>
+<?php
 }
 
 if(isset($_GET["action"]))
@@ -564,59 +576,7 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
    ?>  
 
  
-<?php 
 
-if (!empty($_SESSION['username'])) {
-?>
-   <section class="course">
-
-    <div class="row">
-    <?php
-     $servername = "localhost";
-        $username ="root";
-        $password = "";
-        $DB = "webdatabase";
-        $conn = mysqli_connect($servername,$username,$password,$DB);
-            $sql= "SELECT courseId FROM userCourse WHERE userid = '".$_SESSION['userid'].
-            "'";
-            $result=mysqli_query($conn,$sql);
-            while($row=mysqli_fetch_array($result)){
-            $sql2= "SELECT * FROM course Where courseId = '".$row['courseId']."'";
-            $result2=mysqli_query($conn,$sql2);
-    
-        
-            if($row2=mysqli_fetch_array($result2)){
-                ?>
-                
-                 <div class="Course-col">
-                  <img src="<?php echo $row2['image']; ?>" height="250px" width="400px"></a>
-                  <?php //echo $row['courseId'] ?>
-                  <span class="coursename"><?php echo $row2['courseName']; ?></span><br>
-                  <span class="instName"> <?php echo $row2['instructorName']; ?></span><br>
-                  
-
-                  <?php echo "(".$row2['enrolledSid'].")"; ?><br>
-
-                  <!-- <?php echo $row['description'];?><br> -->
-
-                 <span class="price"><?php echo "$".$row2['coursePrice']; ?></span><br>
-
-                  <br>
-              </div>
-
-              <?php
-
-               
-               
-            }
-        }
-        $conn->close();
-        
-    
-}
-     ?>
- </div>
-</section>
 
 </div>
 

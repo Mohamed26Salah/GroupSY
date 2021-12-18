@@ -27,7 +27,7 @@ if (empty($_SESSION['username'])) {
         		<li><a href="">Home</a></li>
         		<li><a href="">About</a></li>
         		<li><a href="courses.php">COURSES</a></li>
-        		<li><a href="">BLOG</a></li>
+        		<li><a href="myCourses.php">My Courses</a></li>
         		<li><a href="">CONTACT</a></li>
         		<li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
         	</ul>
@@ -47,7 +47,7 @@ else{
         		<li><a href="">Home</a></li>
         		<li><a href="">About</a></li>
         		<li><a href="courses.php">COURSES</a></li>
-        		<li><a href="">BLOG</a></li>
+        		<li><a href="myCourses.php">My Courses</a></li>
         		<li><a href="">CONTACT</a></li>
         		<li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
         		<li><a href="signOut.php">signOut</a></li>

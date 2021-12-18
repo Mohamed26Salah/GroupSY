@@ -20,7 +20,7 @@
  .fasl{
   margin-left: 5px;
    margin-right: 5px;
-   margin-top: 300px;
+   margin-top: 70px;
   /* flex-basis: 21%;*/
    /*background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url(texture/jpg);*/
    border-radius: 10px;
@@ -151,5 +151,11 @@
 .star{
   margin-left: 1%;
   margin-bottom: 20%;
+}
+h1{
+   text-align: center;
+   font-weight: 600;
+   margin: auto;
+
 }
 
