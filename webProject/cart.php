@@ -200,13 +200,16 @@ if(isset($_GET["failed"]))
            <div align="left">
   <a href="/GroupSY/webProject/cart.php?action=clear"><b>Clear Cart</b></a>
 </div>
+<div align="right">
+    <a href="/GroupSY/webProject/courses.php"><b>Back to Course</b></a>
+</div>
      </div>
    <?php
    if(isset($_POST['BuyNow'])){
-
+        header("location:/GroupSY/webProject/cart.php?action=clear");
     if(empty($_SESSION['username'])){
          ?>
-         
+
             <script>window.location.replace("LR2.php");</script>
              <?php 
     }
@@ -227,6 +230,16 @@ if(isset($_GET["failed"]))
               //moshkela hna  
            $message1 = "Thank you for your purchase.";
            echo "<script type='text/javascript'>alert('$message1');</script>";
+
+
+
+         
+
+
+
+
+
+
 
     }
    }

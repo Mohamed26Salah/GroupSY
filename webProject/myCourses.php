@@ -16,41 +16,7 @@
 
 </head>
 <body>
-    <?php
-if (empty($_SESSION['username'])) {
-    ?>
-   <nav>
-    <div class="topnav">
- <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="courses.php">COURSES</a></li>
-                <li><a href="myCourses.php">My Courses</a></li>
-                <li><a href="">CONTACT</a></li>
-                <li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
-            </ul>
-</div>
-
-
-<form method="post">
-<div class="searchBox">
-            <input class="searchInput"type="text" name="search" placeholder="enter course name....">
-            <button class="searchButton" href="#"type="submit" name="submit" value = "Search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-          </div>
-
-    <!-- <input type="text" name="search" placeholder="enter course name....">
-
-    <input type="submit" name="submit" value = "Search">
- -->
-  </form>
-</nav>
-<h1>You Need to be Logged. In order to view your courses</h1>
-<?php
-}
-else{
-    ?>
+   
 <nav>
     <div class="topnav">
  <ul>
@@ -129,7 +95,7 @@ else{
         $conn->close();
         
     
-}
+
      ?>
  </div>
 </section>

@@ -27,7 +27,7 @@ if (empty($_SESSION['username'])) {
                 <li><a href="index.php">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
-                <li><a href="myCourses.php">My Courses</a></li>
+               <!--  <li><a href="myCourses.php">My Courses</a></li> -->
                 <li><a href="">CONTACT</a></li>
                 <li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
             </ul>
@@ -84,12 +84,15 @@ else{
  }
   
 ?>
+
+
+<div class="fasl" style="background-image: url('texture.jpg');">Discover New Courses</div>
+
+
 <div class="cart_div">
 <a href="cart.php"><img src="cart-icon.png" /> Cart<span><!-- <?php echo $cart_count; ?> --></span></a>
 </div>
 
-
-<div class="fasl" style="background-image: url('texture.jpg');">Discover New Courses</div>
 
 <div class="All">
 <section class="course">
