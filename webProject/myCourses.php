@@ -69,7 +69,7 @@
         
             if($row2=mysqli_fetch_array($result2)){
                 ?>
-                
+               <a href="index2.php"> 
                  <div class="Course-col">
                   <img src="<?php echo $row2['image']; ?>" height="250px" width="400px"></a>
                   <?php //echo $row['courseId'] ?>
@@ -85,7 +85,7 @@
 
                   <br>
               </div>
-
+            </a>
               <?php
 
                
