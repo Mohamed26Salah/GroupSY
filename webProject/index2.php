@@ -138,7 +138,7 @@
 echo $_GET['id'];  
 ?> 
 <script>
-var id = document.getElementById("get").value;
+var course_id = document.getElementById("get").value;
 // console.log(id);
 
 
@@ -215,7 +215,7 @@ $(document).ready(function(){
             $.ajax({
                 url:"submit_rating.php",
                 method:"POST",
-                data:{rating_data:rating_data, user_name:user_name, user_review:user_review},
+                data:{rating_data:rating_data, user_name:user_name, user_review:user_review, course_id:course_id},
                 success:function(data)
                 {
                     $('#review_modal').modal('hide');
