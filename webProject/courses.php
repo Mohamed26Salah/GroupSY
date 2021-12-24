@@ -344,12 +344,6 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                   ?>
                  
                  </div>
-                 
-
-                 
-            }
-           
-       }
 
                  </div>
                  </a>
