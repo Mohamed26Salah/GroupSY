@@ -134,9 +134,6 @@
 	color:#e9ecef;
 }
 </style>
-<?php
-echo $_GET['id'];  
-?> 
 <script>
 var course_id = document.getElementById("get").value;
 // console.log(id);
@@ -233,11 +230,12 @@ $(document).ready(function(){
     // console.log('jOEX');
     function load_rating_data()
     {
+       
         $.ajax({
             url:"submit_rating.php",
             method:"POST",
             // data:{rating_data:rating_data},
-             data:{action:'load_data'},
+            data:{action:'load_data'},
             dataType:"JSON",
             success:function(data)
             {
