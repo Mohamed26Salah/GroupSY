@@ -115,7 +115,7 @@
     	</div>
   	</div>
 </div>
-<div id="speed"><h1></h1></div>
+<div id="speed"><h1>Speed </h1></div>
 <style>
 .progress-label-left
 {
@@ -243,7 +243,7 @@ $(document).ready(function(){
 
 
             let xhr = new XMLHttpRequest();
-       xhr.open("GET", "submit_rating2.php?id="+course_id, true);
+       xhr.open("GET", "submit_rating2.php", true);
        xhr.onload = ()=>{
       if(xhr.readyState === XMLHttpRequest.DONE){
           if(xhr.status === 200){
@@ -255,7 +255,7 @@ $(document).ready(function(){
                 $('#total_review').text(data.total_review);
 
                 var count_star = 0;
-                 // console.log(data);
+                 console.log(data);
                 $('.main_star').each(function(){
                     count_star++;
                     if(Math.ceil(data.average_rating) >= count_star)
@@ -285,57 +285,57 @@ $(document).ready(function(){
 
                 $('#one_star_progress').css('width', (data.one_star_review/data.total_review) * 100 + '%');
 
-                // if(data.review_data.length > 0)
-                // {
-                //     var html = '';
+                if(data.review_data.length > 0)
+                {
+                    var html = '';
 
-                //     for(var count = 0; count < data.review_data.length; count++)
-                //     {
-                //         html += '<div class="row mb-3">';
+                    for(var count = 0; count < data.review_data.length; count++)
+                    {
+                        html += '<div class="row mb-3">';
 
-                //         html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>';
+                        html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>';
 
-                //         html += '<div class="col-sm-11">';
+                        html += '<div class="col-sm-11">';
 
-                //         html += '<div class="card">';
+                        html += '<div class="card">';
 
-                //         html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
+                        html += '<div class="card-header"><b>'+data.review_data[count].user_name+'</b></div>';
 
-                //         html += '<div class="card-body">';
+                        html += '<div class="card-body">';
 
-                //         for(var star = 1; star <= 5; star++)
-                //         {
-                //             var class_name = '';
+                        for(var star = 1; star <= 5; star++)
+                        {
+                            var class_name = '';
 
-                //             if(data.review_data[count].rating >= star)
-                //             {
-                //                 class_name = 'text-warning';
-                //             }
-                //             else
-                //             {
-                //                 class_name = 'star-light';
-                //             }
+                            if(data.review_data[count].rating >= star)
+                            {
+                                class_name = 'text-warning';
+                            }
+                            else
+                            {
+                                class_name = 'star-light';
+                            }
 
-                //             html += '<i class="fas fa-star '+class_name+' mr-1"></i>';
-                //         }
+                            html += '<i class="fas fa-star '+class_name+' mr-1"></i>';
+                        }
 
-                //         html += '<br />';
+                        html += '<br />';
 
-                //         html += data.review_data[count].user_review;
+                        html += data.review_data[count].user_review;
 
-                //         html += '</div>';
+                        html += '</div>';
 
-                //         html += '<div class="card-footer text-right">On '+data.review_data[count].datetime+'</div>';
+                        html += '<div class="card-footer text-right">On '+data.review_data[count].datetime+'</div>';
 
-                //         html += '</div>';
+                        html += '</div>';
 
-                //         html += '</div>';
+                        html += '</div>';
 
-                //         html += '</div>';
-                //     }
+                        html += '</div>';
+                    }
 
-                //     $('#review_content').html(html);
-                // }
+                    $('#review_content').html(html);
+                }
             // }
         // })
        }

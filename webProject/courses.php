@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+   <!--  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -141,78 +146,22 @@ else{
                   $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
                   $result3=mysqli_query($conn,$sql3);
                    if($row3=mysqli_fetch_array($result3)){
-                    if($row3['Total']<=1){
-                        ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                     else if($row3['Total']>1&&$row3['Total']<=1.5){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>1.5&&$row3['Total']<=2){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>2&&$row3['Total']<=2.5){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>2.5&&$row3['Total']<=3){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                     else if($row3['Total']>3.5&&$row3['Total']<=4){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>4&&$row3['Total']<=4.5){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>4.5&&$row3['Total']<=5){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <?php
-                    }
+                    for($star = 1; $star <= 5; $star++)
+                      {
+                          $class_name = '';
+
+                          if($row3['Total'] >= $star)
+                          {
+                               $class_name = 'text-warning';
+                          }
+                          else
+                          {
+                               $class_name = 'star-light';
+                            }
+                            ?>
+                            <i class='fas fa-star <?php echo $class_name ?> mr-1'></i>
+                            <?php
+                        }
                    }
                   ?>
                  
@@ -268,78 +217,22 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                   $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
                   $result3=mysqli_query($conn,$sql3);
                    if($row3=mysqli_fetch_array($result3)){
-                    if($row3['Total']<=1){
-                        ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                     else if($row3['Total']>1&&$row3['Total']<=1.5){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>1.5&&$row3['Total']<=2){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>2&&$row3['Total']<=2.5){
-                         ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>2.5&&$row3['Total']<=3){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                     else if($row3['Total']>3.5&&$row3['Total']<=4){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>4&&$row3['Total']<=4.5){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <?php
-                    }
-                    else if($row3['Total']>4.5&&$row3['Total']<=5){
-                       ?>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <?php
-                    }
+                   for($star = 1; $star <= 5; $star++)
+                      {
+                          $class_name = '';
+
+                          if($row3['Total'] >= $star)
+                          {
+                               $class_name = 'text-warning';
+                          }
+                          else
+                          {
+                               $class_name = 'star-light';
+                            }
+                            ?>
+                            <i class='fas fa-star <?php echo $class_name ?> mr-1'></i>
+                            <?php
+                        }
                    }
                   ?>
                  
