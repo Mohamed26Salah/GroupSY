@@ -47,6 +47,7 @@ if(isset($_POST["add_to_cart"]))
         {
             if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
             {
+                echo "Joex";
                 echo "it is already in the cart";
                 header("location:/GroupSY/webProject/courses.php?failed=1");
                 //fe moshkela hna //ask samira

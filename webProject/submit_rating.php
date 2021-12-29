@@ -47,12 +47,18 @@ if(isset($_POST["rating_data"]))
 	VALUES (:user_id,:course_id,:user_review,:datetime,:user_name,:user_rating,:user_image)
 	";
 
-	$statement = $connect->prepare($query);
-
+ try { 
+ 	$statement = $connect->prepare($query);
 	$statement->execute($data);
+	echo "Your Review & Rating Successfully Submitted";
+    }
+    catch(Exception $e){
+        echo 'You have already sumbitted a review';
+    }
+	
     
 
-	echo "Your Review & Rating Successfully Submitted";
+	
 
 }
 

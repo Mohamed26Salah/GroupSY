@@ -35,14 +35,23 @@
                             $password = "";
                             $DB = "webdatabase";
                             $conn = mysqli_connect($servername,$username,$password,$DB);
-                            $query = "SELECT * FROM `usercourse` WHERE courseId ='".$_GET['id']."' AND username='".$_SESSION['username']."'";
+                            $query = "SELECT * FROM `usercourse` WHERE courseId ='".$_GET['id']."' AND userId='".$_SESSION['userid']."'";
+                            $query2 = "SELECT * FROM `review` WHERE courseId ='".$_GET['id']."' AND userId='".$_SESSION['userid']."'";
                              $result = $conn->query($query);
                              $row = mysqli_fetch_assoc($result);
-                        if(isset($row['username'])){
-                             
-                        echo"<h3 class='mt-20 mb-3'>Write Review Here</h3>";
-                        echo"<button type='button' name='add_review' id='add_review' class='btn btn-primary'>Review</button>";
-                         
+
+                             $result2 = $conn->query($query2);
+                             $row2 = mysqli_fetch_assoc($result2);
+
+                             if(isset($row['username'])){
+                             if(isset($row2['user_review'])){
+                       
+                              echo"<h3>Thank for your review</h3>";
+                            }
+                            else{
+                            echo"<h3 class='mt-20 mb-3'>Write Review Here</h3>";
+                            echo"<button type='button' name='add_review' id='add_review' class='btn btn-primary'>Review</button>";
+                            }
                            }
                          else
                            {
@@ -194,6 +203,7 @@ $(document).ready(function(){
         }
         else
         {
+            
             $.ajax({
                 url:"submit_rating.php",
                 method:"POST",
@@ -208,6 +218,7 @@ $(document).ready(function(){
                     
                 }
             })
+
         }
 
     });

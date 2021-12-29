@@ -257,7 +257,20 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
   
 </div>
 </section>
-  
 
+ <?php
+  $message = '';
+  if(isset($_GET["success"]))
+{
+
+    $message = '
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        Item Added into Cart
+    </div>
+    ';
+} 
+echo $message;
+  ?>
 </body>
 </html>
