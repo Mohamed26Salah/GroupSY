@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
 <html>
+ <?php session_start();?>
 <head>
     <meta charset="utf-8" />
     <title>Review & Rating</title>
@@ -27,8 +28,33 @@
                     <!-- </div> Some thing is wrong here -->
                 </div>
     				<div class="col-sm-20 text-center">
-    					<h3 class="mt-20 mb-3">Write Review Here</h3>
-    					<button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
+                        <?php 
+                        if(!empty($_SESSION['username'])){
+                            $servername = "localhost";
+                            $username ="root";
+                            $password = "";
+                            $DB = "webdatabase";
+                            $conn = mysqli_connect($servername,$username,$password,$DB);
+                            $query = "SELECT * FROM `usercourse` WHERE courseId ='".$_GET['id']."' AND username='".$_SESSION['username']."'";
+                             $result = $conn->query($query);
+                             $row = mysqli_fetch_assoc($result);
+                        if(isset($row['username'])){
+                             
+                        echo"<h3 class='mt-20 mb-3'>Write Review Here</h3>";
+                        echo"<button type='button' name='add_review' id='add_review' class='btn btn-primary'>Review</button>";
+                         
+                           }
+                         else
+                           {
+                         echo "You need to buy the course, so you can be able to write a comments";
+                        }
+                        $conn->close();
+                       
+                        }
+                    else{
+                        echo "<h3>You need to be logged in, So you cad add comments</h3>";
+                    }
+                        ?>
     				</div>
                 </div>
     		</div>
@@ -57,7 +83,8 @@
                     <i class="fas fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
 	        	</h4>
 	        	<div class="form-group">
-	        		<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
+
+	        	<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
 	        	</div>
 	        	<div class="form-group">
 	        		<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>

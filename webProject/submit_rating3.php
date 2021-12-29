@@ -12,7 +12,7 @@ $query = "SELECT * FROM `ratings` WHERE courseId ='".$_GET['id']."'";
 	$one_star_progress = 0;
   
 	$result = $conn->query($query);
-    // $html = '';
+
 	$row = mysqli_fetch_assoc($result);
 	$five_star_progress = (($row["star5"]/$row["TNOR"]) * 100);
 	$four_star_progress = (($row["star4"]/$row["TNOR"]) * 100);
