@@ -10,7 +10,7 @@ if(isset($_POST["rating_data"]))
 	$data = array(
 		':course_id'      =>  $_POST['course_id'],
 		':user_review'		=>	$_POST["user_review"],
-		':datetime'			=>	time(),
+		':datetime'			=>	date("Y-m-d H:i:s"),
 		':user_name'		=>	$_POST["user_name"],
 		':user_rating'    =>	$_POST["rating_data"]
 		

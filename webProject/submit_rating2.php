@@ -18,7 +18,7 @@ $conn = mysqli_connect($servername,$username,$password,$DB);
 	
 
 	$query = "SELECT * FROM `review` WHERE courseId ='".$_GET['id']."' ORDER BY `userId`  DESC ";
-	//fe 8alta hnaaa course id
+	
 
   
 	$result = $conn->query($query);

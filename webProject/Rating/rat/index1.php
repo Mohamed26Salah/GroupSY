@@ -36,7 +36,7 @@
 
                             <div class="progress-label-right">(<span id="total_five_star_review">0</span>)</div>
                             <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress"></div>
+                                <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" id="five_star_progress" style="width:50%"></div>
                             </div>
                         </p>
     					<p>
