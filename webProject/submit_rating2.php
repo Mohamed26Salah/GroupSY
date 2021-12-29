@@ -17,7 +17,7 @@ $conn = mysqli_connect($servername,$username,$password,$DB);
 
 	
 
-	$query = "SELECT * FROM `review` WHERE courseId ='".$_GET['id']."' ORDER BY `userId`  DESC ";
+	$query = "SELECT * FROM `review` WHERE courseId ='".$_GET['id']."' ORDER BY `datetime`  DESC ";
 	
 
   
@@ -30,7 +30,7 @@ $html = '';
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           $html .= "<div class='row mb-3'>
 
-                      <div class='col-sm-1'><div class='rounded-circle bg-danger text-white pt-2 pb-2'><h3 class='text-center'>'+data.review_data[count].user_name.charAt(0)+'</h3></div></div>
+                      <div class='col-sm-1'><div class='rounded-circle pt-2 pb-2'><img class='rounded-circle mt-4' width='120px' src='".$row["image"]."'></div></div>
 
                         <div class='col-sm-11'>
 

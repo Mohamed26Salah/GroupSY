@@ -68,9 +68,13 @@
 }
 
 .row a{
-  color: #fff;
+  color: black;
   text-decoration: none;
   font-size: 20px;
+ }
+ .row a:hover{
+  color: black;
+  text-decoration: none;
  }
 
 .Course-col{

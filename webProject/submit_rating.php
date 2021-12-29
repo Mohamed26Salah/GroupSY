@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //submit_rating.php
 
 $connect = new PDO("mysql:host=localhost;dbname=webdatabase", "root", "");
@@ -8,12 +8,13 @@ if(isset($_POST["rating_data"]))
 {
 
 	$data = array(
+		':user_id'        => $_SESSION['userid'],
 		':course_id'      =>  $_POST['course_id'],
 		':user_review'		=>	$_POST["user_review"],
 		':datetime'			=>	date("Y-m-d H:i:s"),
 		':user_name'		=>	$_POST["user_name"],
-		':user_rating'    =>	$_POST["rating_data"]
-		
+		':user_rating'    =>	$_POST["rating_data"],
+		':user_image'     => $_SESSION['image']
 	);
     /////////////////////////////////////////////////////////////
      $rateType = $_POST['rating_data'];
@@ -42,8 +43,8 @@ if(isset($_POST["rating_data"]))
     /////////////////////////////////////////////////////////////
 	$query = "
 	INSERT INTO review 
-	(courseId, user_review, datetime,user_Name,user_rating) 
-	VALUES (:course_id,:user_review,:datetime,:user_name,:user_rating)
+	(userId,courseId, user_review, datetime,user_Name,user_rating,image) 
+	VALUES (:user_id,:course_id,:user_review,:datetime,:user_name,:user_rating,:user_image)
 	";
 
 	$statement = $connect->prepare($query);

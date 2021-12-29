@@ -84,7 +84,7 @@
 	        	</h4>
 	        	<div class="form-group">
 
-	        	<input type="text" name="user_name" id="user_name" class="form-control" placeholder="Enter Your Name" />
+	        	<input type="text" name="user_name" id="user_name" class="form-control" value="<?php echo  $_SESSION["username"] ?>" placeholder="Enter Your Name" />
 	        	</div>
 	        	<div class="form-group">
 	        		<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
@@ -186,6 +186,10 @@ $(document).ready(function(){
         if(user_name == '' || user_review == '')
         {
             alert("Please Fill Both Field");
+            return false;
+        }
+        else if(rating_data == 0){
+            alert("Please give a rate from one star to 5 start");
             return false;
         }
         else

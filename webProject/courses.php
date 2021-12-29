@@ -119,9 +119,9 @@ else{
         
             while($row=mysqli_fetch_array($result)){
                 ?>
-<a href="index2.php?id=<?php echo $row['courseId'];?>">
+
                 <div class="Course-col">
-                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px"></a>
+                  <img src="<?php echo $row['image']; ?>" height="250px" width="400px">
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
@@ -141,7 +141,7 @@ else{
                   <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
                   <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                   </form>
-                  <div class="star">
+                 <a href="index2.php?id=<?php echo $row['courseId'];?>"> <div class="star">
                   <?php 
                   $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
                   $result3=mysqli_query($conn,$sql3);
@@ -165,7 +165,7 @@ else{
                    }
                   ?>
                  
-                 </div>
+                 </div></a>
                 </div>
 
                  <?php
