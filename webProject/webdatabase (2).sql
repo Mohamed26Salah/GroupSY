@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2021 at 02:27 PM
+-- Generation Time: Dec 31, 2021 at 09:38 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -64,6 +64,7 @@ CREATE TABLE `ratings` (
   `star3` int(200) NOT NULL,
   `star4` int(200) NOT NULL,
   `star5` int(200) NOT NULL,
+  `TNOR` varchar(255) GENERATED ALWAYS AS (`star1` + `star2` + `star3` + `star4` + `star5`) VIRTUAL,
   `Total` varchar(16) GENERATED ALWAYS AS ((`star1` * 1 + `star2` * 2 + `star3` * 3 + `star4` * 4 + `star5` * 5) / (`star1` + `star2` + `star3` + `star4` + `star5`)) VIRTUAL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -72,15 +73,15 @@ CREATE TABLE `ratings` (
 --
 
 INSERT INTO `ratings` (`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`) VALUES
-(1, 104, 205, 302, 400, 2004),
-(2, 101, 302, 400, 600, 702),
-(3, 217, 303, 405, 603, 729),
+(1, 104, 206, 303, 400, 705),
+(2, 101, 304, 404, 602, 753),
+(3, 217, 303, 405, 603, 739),
 (4, 5, 0, 0, 0, 4),
 (5, 100, 200, 300, 400, 500),
-(6, 500, 400, 300, 200, 100),
+(6, 500, 400, 300, 200, 101),
 (7, 1000, 700, 500, 250, 10),
-(8, 2000, 1000, 500, 250, 10),
-(9, 11, 20, 30, 40, 2200);
+(8, 2000, 1000, 500, 250, 15),
+(9, 11, 20, 33, 40, 2200);
 
 -- --------------------------------------------------------
 
@@ -89,45 +90,28 @@ INSERT INTO `ratings` (`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`) 
 --
 
 CREATE TABLE `review` (
-  `userId` int(255) NOT NULL,
+  `userId` varchar(255) NOT NULL,
   `courseId` varchar(255) NOT NULL,
+  `user_Name` varchar(255) NOT NULL,
+  `user_rating` varchar(255) NOT NULL,
   `user_review` varchar(255) NOT NULL,
-  `datetime` date NOT NULL,
-  `user_Name` varchar(255) NOT NULL
+  `datetime` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `review`
 --
 
-INSERT INTO `review` (`userId`, `courseId`, `user_review`, `datetime`, `user_Name`) VALUES
-(2, '1', 'Salahasdasd', '0000-00-00', 'asda'),
-(3, '2', 'asdasd', '0000-00-00', 'sadasd'),
-(4, '4', 'SalahSalahSalah', '0000-00-00', 'Salah'),
-(5, '9', 'speed', '0000-00-00', 'speed'),
-(6, '2', 'lsa m3mlsth en elshary elcourse hwa ely y3ml; review ya 2', '0000-00-00', 'Joex'),
-(7, '3', 'time msh sha8aaal', '0000-00-00', 'time'),
-(8, '3', 'dsasdaasd', '0000-00-00', 'asdsad'),
-(9, '3', 'asdasdasd', '0000-00-00', 'asdasd'),
-(11, '1', 'd', '0000-00-00', 'd'),
-(12, '1', 'asdasd', '0000-00-00', 'asdasd'),
-(13, '1', 'dfgdfg', '0000-00-00', 'gdfgdf'),
-(14, '2', 'asdasd', '0000-00-00', 'asdas'),
-(15, '1', 'asdasd', '0000-00-00', 'asdasd'),
-(16, '1', 'L;', '0000-00-00', 'KL'),
-(17, '1', 'L;', '0000-00-00', 'KL'),
-(18, '1', ';\';\'', '0000-00-00', '\';;\''),
-(19, '1', 'sdsad', '0000-00-00', 'asdasdasda'),
-(20, '1', 'd', '0000-00-00', 'd'),
-(21, '1', 'dasasdasd', '0000-00-00', 'asdasdasd'),
-(22, '2', 'l;\'', '0000-00-00', '\'l;'),
-(23, '2', ';\';\'', '0000-00-00', '\';;\''),
-(24, '2', 'k', '0000-00-00', ';'),
-(25, '1', 'tyutyutyu', '0000-00-00', 'ytutyuty'),
-(26, '1', 'hjhgjhj', '0000-00-00', 'ghbjnm '),
-(27, '1', 'asdasd', '0000-00-00', 'dsaasdasd'),
-(28, '1', 'drydfghdf', '0000-00-00', 'wetdrtg'),
-(29, '1', 'asdsad', '0000-00-00', 'asdsadasd');
+INSERT INTO `review` (`userId`, `courseId`, `user_Name`, `user_rating`, `user_review`, `datetime`, `image`) VALUES
+('1', '1', 'Salah', '5', 'Yonons', '2021-12-29 18:25:33', 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg'),
+('1', '3', 'Salah', '5', 'fuck speed', '2021-12-29 17:22:38', 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg'),
+('6', '3', 'Joex', '5', 'first comment', '2021-12-29 17:20:15', 'uploads/joe.jpg'),
+('6', '6', 'Joex', '5', 'secound comment', '2021-12-29 17:20:38', 'uploads/joe.jpg'),
+('6', '8', 'Joex', '5', 'fuck speed', '2021-12-29 17:21:52', 'uploads/joe.jpg'),
+('8', '2', 'Bassem', '5', 'Salah and joex have finished the review system successfulyy ', '2021-12-29 18:21:32', 'uploads/3683.jpg'),
+('8', '3', 'Bassem', '5', 'fuck speed', '2021-12-29 17:24:53', 'uploads/3683.jpg'),
+('8', '8', 'salah', '5', 'bgrb elstars', '2021-12-29 17:28:33', 'uploads/3683.jpg');
 
 -- --------------------------------------------------------
 
@@ -195,17 +179,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`type`, `userid`, `email`, `password`, `username`, `gender`, `image`) VALUES
-('Adminstrator', 1, 'Salah@gmail.com', 'Salah', 'Salah', 'male', ''),
-('Student', 6, 'Joex@gmail.com', 'Joex', 'Joex', '', ''),
+('Adminstrator', 1, 'Salah@gmail.com', 'Salah', 'Salah', 'male', 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg'),
+('Student', 6, 'Joex@gmail.com', 'Joex', 'Joex', '', 'uploads/joe.jpg'),
 ('Student', 7, 'hady@gmail.com', 'hady', 'hady', '', ''),
-('Student', 8, 'Bassem@gmail.com', 'Bassem', 'Bassem', 'male', ''),
+('Student', 8, 'Bassem@gmail.com', 'Bassem', 'Bassem', 'male', 'uploads/3683.jpg'),
 ('Student', 21, 'Gika@gmail.com', 'Gika', 'Gika', '', 'Screenshot (16).png'),
 ('Student', 22, 'Speed@gmail.com', 'Speed', 'Speed', '', 'animesher.com_anime-boy-broken-cute-762097.jpg'),
 ('Student', 24, 'Mohaned@gmail.com', 'Mohaned', 'Mohaned', '', 'Screenshot (3).png'),
 ('Student', 25, 'honda@gmail.com', 'honda', 'honda', 'male', 'Screenshot (3).png'),
 ('Student', 26, 'Yasser', 'Yasser', 'Yasser', 'male', 'Image4.jpg'),
 ('Student', 27, 'Speedoo@gmail.com', 'Speedoo', 'Speedoo', 'male', 'Image6.jpg'),
-('Student', 28, 'Nezoko@gmail.com', 'Nezoko', 'Nezoko', 'male', 'Image2.jpg'),
+('Student', 28, 'Nezoko@gmail.com', 'Nezoko', 'Nezoko', 'male', 'uploads/artworks-000557600433-dvmtmy-t500x500.jpg'),
 ('Student', 29, 'BlackClover@gmail.com', 'Black', 'Black Clover', '', 'Image3.jpg'),
 ('Student', 31, 'Samira@gmail.com', 'Samira', 'Samira', 'female', ''),
 ('Student', 36, 'Lara@gmail.com', 'Lara', 'Lara', 'female', ''),
@@ -249,7 +233,7 @@ ALTER TABLE `ratings`
 -- Indexes for table `review`
 --
 ALTER TABLE `review`
-  ADD PRIMARY KEY (`userId`);
+  ADD PRIMARY KEY (`userId`,`courseId`);
 
 --
 -- Indexes for table `usercourse`
@@ -272,12 +256,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `course`
   MODIFY `courseId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `review`
---
-ALTER TABLE `review`
-  MODIFY `userId` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
