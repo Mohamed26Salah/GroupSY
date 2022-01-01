@@ -65,6 +65,7 @@
  </div>
   <?php
 ///////////////////////////////////////////////////////////////////////
+  $sora="images.png";
  if(!empty($_FILES['fileToUpload']['name'])){
     $target_dir = "uploads/";
     $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
@@ -86,9 +87,13 @@
     $tmp_name = $_FILES['fileToUpload']['tmp_name'];
     $name = basename($_FILES['fileToUpload']['name']);
     move_uploaded_file($tmp_name, "$target_dir/$name");
+    
 
+}else{
 
-}
+     $target_dir = "uploads/";
+     $target_file = $target_dir.$sora;
+ }
 
 
   /////////////////////////////////////////////////////////////////////////
@@ -108,6 +113,9 @@
            // $row = $result-> fetch_array(MYSQLI_ASSOC);
             //mysqli_num_rows($result)==1
             if($row=mysqli_fetch_array($result)){
+               $status = "Active now";
+                $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+                $result2=mysqli_query($conn,$sql);
             $_SESSION["Type"]=$row[0];
             $_SESSION["userid"]=$row[1];
             $_SESSION["email"]=$row[2];
@@ -115,6 +123,7 @@
             $_SESSION["username"]=$row[4];
             $_SESSION["gender"]=$row[5];
             $_SESSION["image"]=$row[6];
+            $_SESSION["unique_id"]=$row[8];
               ?>
 
             <script>window.location.replace("http://localhost/GroupSY/webProject/index.php");</script>
@@ -144,6 +153,7 @@
         $username ="root";
         $password = "";
         $DB = "webdatabase";
+        $ran_id = rand(time(), 100000000);
         $conn = mysqli_connect($servername,$username,$password,$DB);
         $sql= "SELECT * FROM users WHERE username='".$Data1."' AND email='".$Data3."'";
         $result=mysqli_query($conn,$sql);
@@ -155,7 +165,7 @@
         }
         else
         {
-           $sql= "INSERT INTO users (username, password, email,image,type,gender) VALUES ('$Data1', '$Data2', '$Data3','$Data4','$Data5','$Data6')";
+           $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$Data4','$Data5','$Data6','$ran_id')";
 
         if($conn->query($sql)=== TRUE){
          echo "Yeaaaah";
@@ -187,6 +197,9 @@
            // $row = $result-> fetch_array(MYSQLI_ASSOC);
           //  mysqli_num_rows($result)==1
             if($row=mysqli_fetch_array($result)){
+              $status = "Active now";
+                $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
+                $result2=mysqli_query($conn,$sql);
             $_SESSION["Type"]=$row[0];
             $_SESSION["userid"]=$row[1];
             $_SESSION["email"]=$row[2];
@@ -194,7 +207,7 @@
             $_SESSION["username"]=$row[4];
             $_SESSION["gender"]=$row[5];
             $_SESSION["image"]=$row[6];
-
+            $_SESSION["unique_id"]=$row[8];
               ?>
             <script>window.location.replace("http://localhost/GroupSY/webProject/index.php");</script>
              <?php

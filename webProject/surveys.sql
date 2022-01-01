@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 07:46 PM
+-- Generation Time: Dec 31, 2021 at 02:15 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.11
 
@@ -18,43 +18,34 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `webdatabase1`
+-- Database: `weball`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ratings`
+-- Table structure for table `surveys`
 --
 
-CREATE TABLE `ratings` (
+CREATE TABLE `surveys` (
   `courseid` int(11) NOT NULL,
-  `star1` int(200) NOT NULL,
-  `star2` int(200) NOT NULL,
-  `star3` int(200) NOT NULL,
-  `star4` int(200) NOT NULL,
-  `star5` int(200) NOT NULL,
-  `Total` varchar(16) GENERATED ALWAYS AS ((`star1` * 1 + `star2` * 2 + `star3` * 3 + `star4` * 4 + `star5` * 5) / (`star1` + `star2` + `star3` + `star4` + `star5`)) VIRTUAL
+  `userid` int(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `enjoyed?` varchar(100) NOT NULL,
+  `suggestion` varchar(100) NOT NULL,
+  `instructorRate` int(100) NOT NULL,
+  `courseRate` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ratings`
---
-
-INSERT INTO `ratings` (`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`) VALUES
-(1, 100, 300, 400, 600, 700),
-(2, 217, 301, 403, 603, 728),
-(3, 5, 0, 0, 0, 4);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `ratings`
+-- Indexes for table `surveys`
 --
-ALTER TABLE `ratings`
-  ADD PRIMARY KEY (`courseid`,`star1`,`star2`,`star3`,`star4`,`star5`);
+ALTER TABLE `surveys`
+  ADD PRIMARY KEY (`courseid`,`userid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

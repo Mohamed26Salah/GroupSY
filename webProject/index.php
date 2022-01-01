@@ -5,11 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Universtiy Website</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="ay7aga.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 
 </head>
 <body>
@@ -49,6 +50,28 @@ else{
         		<li><a href="courses.php">COURSES</a></li>
         		<li><a href="myCourses.php">My Courses</a></li>
         		<li><a href="">CONTACT</a></li>
+        		 <?php
+                       
+                        if($_SESSION['Type']=="Adminstrator"){
+                             ?>
+                            <li><a href="adminPanel.php">ADMINPANEL</a></li>
+							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                        
+                     <?php }
+						
+
+                        ?>
+						<?php
+						 if($_SESSION['Type']=="Student"){
+                        ?>
+							
+								<li><a class="bellIcon" href =index.php?id=9#popup5><i class='fas fa-bell'></i></li></a>
+								<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                        	
+                     <?php }
+						
+
+                        ?>
         		<li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
         		<li><a href="signOut.php">signOut</a></li>
         	</ul>
@@ -190,5 +213,7 @@ else{
   </div>
    <p>Made by <i class="fa fa-heart-o"></i> Salah and Yonus </p>
 </section>
+<?php include_once "sideBarChat.php"; ?>
 </body>
+
 </html>

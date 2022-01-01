@@ -28,7 +28,7 @@ if (empty($_SESSION['username'])) {
     ?>
    <nav>
     <div class="topnav">
- <ul>
+            <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="courses.php">COURSES</a></li>
@@ -125,7 +125,30 @@ else{
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row['instructorName']; ?></span><br>
-                  
+                      <?php
+                        if (!empty($_SESSION['username'])) {
+                        if($_SESSION['Type']=="Adminstrator"){
+                             ?>
+                             <div class="box">
+                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup1>Edit</a>
+                        </div>
+                        <div class="box">
+                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup2>Delete</a>
+                        </div>
+
+                        <?php if($row['Approved'] == 0){
+
+                        ?>
+                        <div class="box">
+                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup4>Approve</a>
+                        </div>
+                        
+                     <?php
+                    } 
+                 }
+                     } 
+
+                        ?>
 
                   <?php echo "(".$row['enrolledSid'].")"; ?><br>
 
@@ -168,10 +191,181 @@ else{
                  </div></a>
                 </div>
 
-                 <?php
+                 
+                    <?php 
+                 if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $query1 = "select * from course where courseId=$id";
+                    $result1 = $conn->query($query1);
+                    while ($row1 = mysqli_fetch_array($result1)) {
+                ?>
+
+
+                                   <!--  edit popup -->
+
+            <div id="popup1" class="overlay">
+                        <div class="popup">
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                <div  >    
+                                    <form action="editCourse.php" method="post" id="changing" enctype="multipart/form-data">
+
+                                      <h2>Edit Options</h2> 
+
+                                      <br>
+                                       <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
+                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>"><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>"><br><br>
+                                      Enrolled Student: <input type="text" name = "enrolledSid" value= "<?php echo $row1['enrolledSid']; ?>"><br><br>
+                                      Description:<br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                       <div class="center">
+                                          <div class="form-input">
+                                            <div class="preview">
+                                              <img id="file-ip-1-preview">
+                                            </div>
+                                            <label for="file-ip-1">Upload Image</label>
+                                            <input type="file" id="file-ip-1"  name="fileup" onchange="showPreview(event);">
+                                            
+                                          </div>
+                                        </div> 
+                                      <input type="submit" name = "subedit" >
+                                     
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>       
+
+
+                   <!--  delete popup -->
+                    <div id="popup2" class="overlay">
+                        <div class="popup">
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                <div  >    
+                                    <form action="deleteCourse.php" method="post" id="changing" enctype="multipart/form-data">
+
+                                      <h2>DELETE CONFIRM?</h2> 
+
+                                      <br>
+                                       <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
+                                      
+                                      <input type="submit" name = "subdelete" value="CONFIRM" >
+                                     
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- popup approve -->
+                    <div id="popup4" class="overlay">
+                        <div class="popup">
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                <div  >    
+                                    <form action="approving.php" method="post" id="changing" enctype="multipart/form-data">
+
+                                      <h2>Do you approve this course !?</h2> 
+
+                                      <br>
+                                       <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
+                                      
+                                      <input type="submit" name = "subapprove" value="approve" >
+                                     
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>       
+                             
+                
+<?php
+
+ }
+////////////////////////////////////////////////////////////////////////////////////////////
+
             }
+          /////////////////////////////////////////////////
+
+            }
+
+            ?>
+             <!-- add course -->
+              <div class="Course-col">
+              <?php
+                        if (!empty($_SESSION['username'])) {
+                        if($_SESSION['Type']=="Adminstrator" ||$_SESSION['Type']=="Tutor"){
+                             ?>
+                            
+                         <a href=courses.php?#popup3>
+                    
+                      <img src="./uploads/add.add" alt="add" height="400px" width="400px">
+                     </a>
+                      <br>
+                     <?php }
+                     } 
+
+                        ?>
+      
+       
+
+
+                        <!--  add popup -->
+                    <div id="popup3" class="overlay">
+                        <div class="popup">
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                <div  >    
+                                    <form action="addCourse.php" method="post" id="changing" enctype="multipart/form-data">
+
+                                      <h2>Add Course</h2> 
+
+                                      <br>
+                                       <input  type="hidden" name = "courseId" >
+                                        <?php
+                                       $approve = 0; 
+                                       if($_SESSION['Type']=="Adminstrator"){
+                                            $approve = 1;
+                                       }
+                                       else if($_SESSION['Type']=="Tutor"){
+                                            $approve = 0;
+                                       }
+                                        ?>
+                                       <input  type="hidden" name = "approved" value = "<?php echo $approve;?>">
+
+                                      Course Name: <input type="text" id= "cn"name = "courseName"><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" ><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" ><br><br>
+                                      Enrolled Student: <input type="text" name = "enrolledSid" ><br><br>
+                                      Description: <br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                       <div class="center">
+                                          <div class="form-input">
+                                            <div class="preview">
+                                              <img id="file-ip-1-preview">
+                                            </div>
+                                            <label for="file-ip-1">Upload Image</label>
+                                            <input type="file" id="file-ip-1"  name="fileup" onchange="showPreview(event);">
+                                            
+                                          </div>
+                                        </div> 
+                                      <input type="submit" name = "subedit" >
+                                     
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                 </div> 
+                 <?php  
            
        }
+            /////////////////////////////////////////////////
+       
+
+
        else{
 $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
 
@@ -269,8 +463,10 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
         Item Added into Cart
     </div>
     ';
+
 } 
 echo $message;
+
   ?>
 </body>
 </html>
